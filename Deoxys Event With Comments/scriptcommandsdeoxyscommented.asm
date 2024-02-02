@@ -344,15 +344,15 @@ setmondataobedientballs: MACRO
 	ENDM
 
 setmondatalocation: MACRO
-	db $00
-	dw $4802
+	db $00       ; All the following comments will be about things that change between these 3 macros. The underlying macro will work to change any field you want
+	dw $4802     ; so there is a lot of similarity. The comments will now be centered around where to find the hex values of the fields you want to change and the hex value of what to change it to.
 	dw $A203
-	dw $2123
+	dw $2123     ; Value being moved into r3 is 0x23, or 35 in decimal which corresponds to MON_DATA_MET_LOCATION. The field being changed is MON_DATA_MET_LOCATION. Reference this to find MON_DATA_MET_LOCATION's value. : https://github.com/pret/pokeruby/blob/master/include/constants/pokemon.h
 	dw $4B03
 	dw $4718
 	dw $0000
 	dd $030045C0
-	dw $00C8
+	dw $00C8    ; The new value we want for field. 0xc8 corresponds to Birth Island. Reference this to find any arbitrary location you'd like. https://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(Generation_III)
 	dw $0000
 	dd $0803D2ED
 	dw $0000
@@ -362,13 +362,13 @@ setmondatalocation: MACRO
 setmondatagame: MACRO
 	dw $4802
 	dw $A203
-	dw $2125
-	dw $4B03
+	dw $2125      ;The field for modification is 0x25 (decimal 37), or MON_DATA_MET_GAME, found at: https://github.com/pret/pokeruby/blob/master/include/constants/pokemon.h
+	dw $4B03      ;If you've made it this far, it's good to know that you can use the above Repo and file to obtain any arbitrary field you wish to modify.
 	dw $4718
 	dw $0000
 	dd $030045C0
-	dw $0003
-	dw $0000
+	dw $0003     ;This is the value we wish to change MON_DATA_MET_GAME to. Reference the "Origins" header of : https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_data_substructures_(Generation_III)
+	dw $0000     ; Basically, the game needs to be Emerald in order to be considered legal. The value binary (3) or hex (0x3) represents Emerald.
 	dd $0803D2ED
 	dw $0000
 	dw $00
