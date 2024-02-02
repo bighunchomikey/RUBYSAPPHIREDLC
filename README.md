@@ -2,7 +2,7 @@
 **DISCLAIMER: THE LAST TIME I WORKED ON THIS PROJECT WAS AUGUST OF 2023, IF I MISS ANY DETAILS, OR INFO IS WRONG, I WILL DO MY BEST TO CORRECT IT
               This project has been completed for some time now, just haven't had the time to upload it**
 
-**To access the files with comments: Go to code > Deoxys Event With Comments**
+***To access the files with comments: Go to code > Deoxys Event With Comments***
 
 This fork is really just meant to comment out the eonticket.asm and scriptcommandsdeoxys.asm from the main repo. This has just about every resrouce that
 I found useful when trying to understand the code and even write my own. I created this fork to give people an easy place to start if you are wanting to learn
