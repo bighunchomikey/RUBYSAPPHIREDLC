@@ -34,7 +34,7 @@ then you should use these files:
 The original repo that not_blisy made has a link for compiling from source: https://www.pokecommunity.com/threads/customising-e-reader-cards.455241/
 Deoxys will appear when you interact with the pokeball on Route 116.
 
-#RUBYSAPPHIREDLC (all work done by Blisy)
+##RUBYSAPPHIREDLC (all work done by Blisy)
 
 Custom E-Card Events based on Eon Ticket Dissasembly
 
