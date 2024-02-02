@@ -1,0 +1,36 @@
+***IMPORTANT START HERE INFO***
+
+**DISCLAIMER: THE LAST TIME I WORKED ON THIS PROJECT WAS AUGUST OF 2023, IF I MISS ANY DETAILS, OR INFO IS WRONG, I WILL DO MY BEST TO CORRECT IT
+              This project has been completed for some time now, just haven't had the time to upload it**
+
+This fork is really just meant to comment out the eonticket.asm and scriptcommandsdeoxys.asm from the main repo. This has just about every resrouce that
+I found useful when trying to understand the code and even write my own. I created this fork to give people an easy place to start if you are wanting to learn
+how not_blisy was able to get his events working, and even if you wish to make your own (or at least make your own encounter lol).
+The code featured in eonticketcommented.asm and scriptcommandsdeoxys.asm is heavily based on not_blisy's solution, but I did make minor edits.
+
+Although this code is not 100% original, I broke it down into pieces that I could understand, and then tried to piece them back together to make my solution.
+A big difference that you will between mine and not_blisy's code (that you will see in scriptcommandsdeoxyscommented.asm) is that they wrote the macros
+using $db (define byte) for every instruction. When talking with not_blisy, they mentioned that this was an oversight and could've been written using
+$dw and $dd, which would greatly reduce the line number and be easier to debug. So I took this suggestion and:
+
+      1) Turned all of the machine code found in the original scriptcommandsdeoxys.asm into ARM/THUMB code.
+      2) Once it was readable (in ARM/THUMB), I looked at the instruction set and learned what each line was doing
+      3) Found all of the related websites & repos that would explain why certain values were used.
+         e.g: mov r1, $4F was in the macro for setting the obedient flag. Why use r1? Why use 0x4F? What even is 0x4F representing?
+         (answers to all of these questions are within the scriptcommandsdeoxyscommented.asm
+      4) Move some lines around to see if I could create a solution that wasn't an exact copy of not_blisy's to see if I really understood what I learned.
+
+If you plan to make your event ticket from this fork/my solution by building/compiling your own card - I would advise against using:
+      - eonticketcommented.asm
+      - scriptcommandsdeoxyscommented.asm
+
+Both of these files are just commented versions of my own working deoxys event, and from my experience, adding comments will change the memory location
+of the macros. Meaning that if you use these files to make an event ticket, they will most likely not work.
+
+If you wish to compile the "event" that I made for debugging the code (I really don't know why you would, not_blisy has a very detailed event already made)
+then you should use these files:
+      - eonticket.asm
+      - scriptcommandsdeoxys.asm
+
+Deoxys will appear when you interact with the pokeball on Route 116.
+
