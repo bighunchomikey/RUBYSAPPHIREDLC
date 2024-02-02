@@ -326,17 +326,24 @@ callasm: MACRO
 ; https://fabiensanglard.net/another_world_polygons_GBA/gbatech.html
 ; It will help tremendously when you are trying to understand all of the machine code below.
 
+; It's also important to know the reason behind the arguments of "setboxmondata"
+;  The function signature is: void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const u8 *data) 
+
+; The struct BoxPokemon *boxMon is the location of boxmon in ram. We want to be editing an encountered pokemon or "genemyparty"
+; The s32 field is referring to the field you want to edit of the pokemon's structure.
+; const u8 *data is referring to the value that you want to put in field.
+
 setmondataobedientballs: MACRO
 	dw $0000     ; Spacer word for keeping data alligned
 	dw $0000     ; Spacer again for allignment
-	dw $4802     ; ldr r0, [pc, #8] - this loads the value of line 339 into r0. Reference gbatek to understand why pc+8 refers a line 6 lines away.
-	dw $A203     ; adr r2, #0xc - this stores a reference of line 340 (a pointer to the adddres of the value of line 340). Refer to gbatek for why 0xC (decimal value 12) relates to a line 6 lines away.
+	dw $4802     ; ldr r0, [pc, #8] - this loads the value of line 345 into r0. Reference gbatek to understand why pc+8 refers a line 6 lines away.
+	dw $A203     ; adr r2, #0xc - this stores a reference of line 346 (a pointer to the adddres of the value of line 346). Refer to gbatek for why 0xC (decimal value 12) relates to a line 6 lines away.
 	dw $214F        ; movs r1, $0x4f - 0x4f (the field you want to change of the mon) is up to you to change. 0x45 is 79 in decimal. I want to change the EVENT_LEGAL field. 0x4f (decimal 79) was obtained from https://github.com/pret/pokeruby/blob/master/include/constants/pokemon.h
-	dw $4B03     ; ldr r3, [pc, #0xc] - r3 now holds the value of line 342. Reference gbatek to understand why pc + 0xc (pc + 12) relates to line 342.
-	dw $4718     ; bx r3 - This branches to the value in r3, which happens to be 0803D2ED, which is the function call for setboxmondata. 
+	dw $4B03     ; ldr r3, [pc, #0xc] - r3 now holds the value of line 348. Reference gbatek to understand why pc + 0xc (pc + 12) relates to line 348.
+	dw $4718     ; bx r3 - This branches to the value in r3, which happens to be 0803D2ED, which is essentially doing a function call for setboxmondata. 
 	dw $0000     ; Essentially what happened above is we prepared r0, r1, and r2 for the function "setboxmondata" which uses r0,r1,r2. Then we stored the function call of setboxmondata in r3, and then essentially just called setboxmondata with the prepared register values.
-	dd $030045c0 ; This is the location of the pokemon we want to change - "gEnemyParty" - found at: https://raw.githubusercontent.com/pret/pokeruby/symbols/pokeruby.sym
-	dw $0010        ; This is the new value that you want the field you picked in line 335 to be. https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_data_substructures_(Generation_III) tells us that bits 0-26 are all used for ribbons. 27-31 are reserved for EVENT_LEGAL. If the high bit is 1, it is obedient.
+	dd $030045c0 ; This is the location of the pokemon that we want to change - "gEnemyParty". It was referenced by line 339. Value "030045c0" found at: https://raw.githubusercontent.com/pret/pokeruby/symbols/pokeruby.sym
+	dw $0010        ; This is the new value that you want the field you picked in line 340 to be. https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_data_substructures_(Generation_III) tells us that bits 0-26 are all used for ribbons. 27-31 are reserved for EVENT_LEGAL. If the high bit is 1, it is obedient.
 	dw $0000        ; Essentially in the word we defined (dw 0010) this is the same as 0000 0000 0000 0000 0000 0000 0001 0000. In short, the high value (bit 5 from the right) is set, which allows our pokemon to be obedient.
 	dd $0803D2ED ; https://raw.githubusercontent.com/pret/pokeruby/symbols/pokeruby.sym
 	dw $0000     ; Spacer
