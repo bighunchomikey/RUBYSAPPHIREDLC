@@ -11,8 +11,9 @@ INCLUDE "../constants/scriptcommandsdeoxys.asm"
 
 DataStart:
 	db IN_GAME_SCRIPT
-	db 0,31 ; Forgor
-	db 7   ; Pokeball
+	db 0,31 ; This determines where the encounter will happen.
+                ; https://www.youtube.com/watch?v=z4-s8dP-v50&list=PLfI5DBI4tNyLBYGNhf1Ee8cgdmMtiilps&index=2 is a really good resource to find the value for your desired location.
+	db 7    ; This is what interactable object will be used to initiate the encounter. There are special rules for what is actually usable, a pokeball object will work just fine. 
 	GBAPTR NormanScriptStart
 	GBAPTR NormanScriptEnd
 
@@ -43,6 +44,11 @@ GoSeeYourFather:
 
 
 NormanScriptStart:
+	;I don't really want to go in depth with each function call because this is really already done for you, but if you want
+        ; to make changes to the encounter sequence, you'll find these sources very helpful:
+
+;https://sphericalice.com/romhacking/documents/script/#c-B6   --> This will give you an understanding of all of the scripting commands.
+;
 	setvirtualaddress NormanScriptStart
 	
 	setwildbattle $19A, $1E, $001         ;Function call to start the wild battle
