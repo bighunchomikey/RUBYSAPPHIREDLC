@@ -76,7 +76,7 @@ NormanScriptStart:
 		   pause $28  
 
 		   callasm $2028E1F      ; This is the addresse of setmonobedientdataballs in ram. The contents of this macro(ish?) is in
-                             ; /Deoxys Event With Comments/scriptcommandsdeoxys\
+                                         ; /Deoxys Event With Comments/scriptcommandsdeoxys\
 		  
 		   callasm $2028E3B      ; This is the address of setmondatalocation in ram. Contents found in the above path.
 		
@@ -105,7 +105,7 @@ NormanScriptStart:
 .delete_script
 	killscript
 		   setmondataobedientballs               ; This is where you want to put your macro names
-	           setmondatalocation
+	           setmondatalocation                    ; These macro names are defined in the scriptcommandsdeoxys file in the main repo.
 		   setmondatagame
 NoRoomToGive:
 	virtualmsgbox KeyItemsPocketIsFull
