@@ -48,7 +48,9 @@ NormanScriptStart:
         ; to make changes to the encounter sequence, you'll find these sources very helpful:
 
 ;https://sphericalice.com/romhacking/documents/script/#c-B6   --> This will give you an understanding of all of the scripting commands.
-;
+;Within this current folder, the file called "Gen 3 List of Flags AND Variables"
+;This will help you understand what the variables are, and how you can leverage temporaries if needed.
+
 	setvirtualaddress NormanScriptStart
 	
 	setwildbattle $19A, $1E, $001         ;Function call to start the wild battle
